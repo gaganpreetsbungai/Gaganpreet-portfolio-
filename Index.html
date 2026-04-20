@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaganpreet Singh T Bungai — PLM Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root[data-theme="light"] {
+    --bg: #f5f2ee;
+    --bg2: #edeae5;
+    --surface: #ffffff;
+    --surface2: #f9f7f4;
+    --border: #e0dbd4;
+    --text: #1a1714;
+    --text2: #5a544d;
+    --text3: #8a8279;
+    --accent: #c1440e;
+    --accent2: #e8622e;
+    --accent-bg: #fdf0eb;
+    --tag-bg: #ede8e2;
+    --tag-text: #5a4a3a;
+    --nav-bg: rgba(245,242,238,0.92);
+    --shadow: 0 2px 20px rgba(0,0,0,0.07);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.1);
+    --glow: rgba(193,68,14,0.15);
+  }
+  :root[data-theme="dark"] {
+    --bg: #111010;
+    --bg2: #181614;
+    --surface: #1e1c19;
+    --surface2: #242220;
+    --border: #2e2b27;
+    --text: #f0ece6;
+    --text2: #a09890;
+    --text3: #6a6460;
+    --accent: #e8622e;
+    --accent2: #f0844e;
+    --accent-bg: #2a1a12;
+    --tag-bg: #2a2520;
+    --tag-text: #c0b8b0;
+    --nav-bg: rgba(17,16,16,0.92);
+    --shadow: 0 2px 20px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
+    --glow: rgba(232,98,46,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.4s, color 0.4s;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    backdrop-filter: blur(16px);
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+    transition: background 0.4s, border-color 0.4s;
+  }
+  .nav-logo {
+
+    font-weight: 800; font-size: 1.1rem;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .theme-toggle {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 6px 14px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.8rem; font-weight: 500;
+    color: var(--text2);
+    transition: all 0.3s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .toggle-icon { font-size: 1rem; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 100px 5% 60px;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 30px; height: 2px; background: var(--accent);
+  }
+  .hero-name {
+
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .hero-name .accent { color: var(--accent); }
+  .hero-title {
+    font-size: 1.1rem; font-weight: 300;
+    color: var(--text2);
+    margin-bottom: 1.8rem;
+    font-style: italic;
+  }
+  .hero-desc {
+    font-size: 1rem; line-height: 1.75;
+    color: var(--text2);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500; font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    transition: all 0.3s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 24px var(--glow); }
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500; font-size: 0.9rem;
+    transition: all 0.3s;
+    background: var(--surface);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Hero Right - Stats Card */
+  .hero-right { position: relative; }
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    animation: floatCard 6s ease-in-out infinite;
+  }
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .card-avatar {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    
+    font-size: 1.6rem; font-weight: 800;
+    color: white;
+    margin-bottom: 1.2rem;
+  }
+  .card-name {
+    
+    font-weight: 700; font-size: 1.15rem;
+    color: var(--text); margin-bottom: 0.2rem;
+  }
+  .card-role { font-size: 0.85rem; color: var(--text2); margin-bottom: 1.5rem; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  .stat-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat-num {
+
+    font-size: 1.6rem; font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; color: var(--text3); margin-top: 4px; letter-spacing: 0.04em; }
+  .contact-pills { display: flex; flex-direction: column; gap: 0.6rem; }
+  .pill {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.82rem; color: var(--text2);
+  }
+  .pill-icon { width: 28px; height: 28px; background: var(--accent-bg); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+
+  /* SECTION BASE */
+  section { padding: 90px 5%; }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-label {
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before { content: ''; width: 20px; height: 2px; background: var(--accent); }
+  .section-title {
+    
+    font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--bg2); }
+  .exp-grid { display: flex; flex-direction: column; gap: 2rem; }
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: var(--shadow);
+  }
+  .exp-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .exp-header {
+    padding: 1.8rem 2rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 1rem; flex-wrap: wrap;
+  }
+  .exp-company {
+
+    font-weight: 700; font-size: 1.1rem;
+    color: var(--text); margin-bottom: 4px;
+  }
+  .exp-role { font-size: 0.88rem; color: var(--accent); font-weight: 500; }
+  .exp-period {
+    background: var(--accent-bg);
+    color: var(--accent);
+    font-size: 0.78rem; font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 50px;
+    white-space: nowrap;
+    border: 1px solid var(--accent);
+  }
+  .current-badge {
+    background: #0f5a2a; color: #4ade80;
+    font-size: 0.7rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 50px;
+    margin-left: 8px;
+    border: 1px solid #4ade80;
+    vertical-align: middle;
+  }
+  .exp-projects { padding: 1.5rem 2rem 2rem; }
+  .project-item { margin-bottom: 1.8rem; }
+  .project-item:last-child { margin-bottom: 0; }
+  .project-name {
+    
+    font-weight: 600; font-size: 0.92rem;
+    color: var(--text); margin-bottom: 0.8rem;
+    padding: 8px 14px;
+    background: var(--surface2);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+  }
+  .resp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .resp-list li {
+    font-size: 0.875rem; line-height: 1.65;
+    color: var(--text2);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .resp-list li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent); font-size: 0.75rem;
+  }
+
+  /* SKILLS */
+  .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .skill-category {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+  }
+  .skill-category:hover { transform: translateY(-3px); }
+  .skill-cat-title {
+   
+    font-weight: 700; font-size: 0.95rem;
+    color: var(--text); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .skill-cat-icon {
+    width: 32px; height: 32px;
+    background: var(--accent-bg);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-size: 0.78rem; font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .tag:hover { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
+
+  /* EDUCATION */
+  #education { background: var(--bg2); }
+  .edu-timeline { position: relative; padding-left: 2rem; }
+  .edu-timeline::before {
+    content: ''; position: absolute; left: 0; top: 10px; bottom: 10px;
+    width: 2px; background: linear-gradient(to bottom, var(--accent), var(--border));
+  }
+  .edu-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+  }
+  .edu-item::before {
+    content: ''; position: absolute;
+    left: -2.3rem; top: 8px;
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 3px solid var(--bg2);
+    box-shadow: 0 0 0 3px var(--accent);
+  }
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+  }
+  .edu-card:hover { transform: translateX(6px); }
+  .edu-degree {
+    
+    font-weight: 700; font-size: 0.95rem;
+    color: var(--text); margin-bottom: 4px;
+  }
+  .edu-school { font-size: 0.83rem; color: var(--text2); margin-bottom: 8px; }
+  .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .edu-year {
+    font-size: 0.75rem; font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-bg);
+    padding: 3px 10px; border-radius: 50px;
+  }
+  .edu-grade { font-size: 0.78rem; color: var(--text3); }
+  .edu-thesis {
+    margin-top: 8px;
+    font-size: 0.78rem; font-style: italic;
+    color: var(--text3);
+    padding: 8px 12px;
+    background: var(--surface2);
+    border-radius: 6px;
+    border-left: 3px solid var(--accent);
+  }
+
+  /* CERTIFICATIONS */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: all 0.3s;
+  }
+  .cert-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+  .cert-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: white;
+  }
+  .cert-name {
+    
+    font-weight: 600; font-size: 0.88rem;
+    color: var(--text); line-height: 1.4;
+  }
+  .cert-issuer { font-size: 0.75rem; color: var(--text3); margin-top: 4px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 3rem 5%;
+    text-align: center;
+  }
+  .footer-name {
+
+    font-weight: 800; font-size: 1.5rem;
+    color: var(--text); margin-bottom: 0.5rem;
+  }
+  .footer-name span { color: var(--accent); }
+  .footer-sub { font-size: 0.85rem; color: var(--text3); margin-bottom: 1.5rem; }
+  .footer-contact { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .footer-link {
+    font-size: 0.85rem; color: var(--text2);
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--accent); }
+  .footer-copy { font-size: 0.75rem; color: var(--text3); }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE NAV */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 22px; height: 2px; background: var(--text); transition: all 0.3s; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 90px; }
+    .hero-right { order: -1; }
+    .hero-card { max-width: 400px; margin: 0 auto; animation: none; }
+    .hero-desc { max-width: 100%; }
+    .skills-layout { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  @media (max-width: 600px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .exp-header { flex-direction: column; }
+    .hero-cta { flex-direction: column; }
+    .footer-contact { flex-direction: column; align-items: center; gap: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">G<span>.</span>Bungai</div>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#certifications">Certs</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span class="toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Dark</span>
+    </button>
+    <div class="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav Overlay -->
+<div id="mobileNav" style="display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--bg);z-index:99;padding:3rem 5%;flex-direction:column;gap:2rem;">
+  <a href="#experience" onclick="closeMobileNav()" style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text);text-decoration:none;">Experience</a>
+  <a href="#skills" onclick="closeMobileNav()" style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text);text-decoration:none;">Skills</a>
+  <a href="#education" onclick="closeMobileNav()" style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text);text-decoration:none;">Education</a>
+  <a href="#certifications" onclick="closeMobileNav()" style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text);text-decoration:none;">Certs</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left fade-in">
+    <div class="hero-eyebrow">PLM Consultant · Automotive</div>
+    <h1 class="hero-name">Gaganpreet<br>Singh <span class="accent">T Bungai</span></h1>
+    <p class="hero-title">Senior Solution Developer & PLM Specialist</p>
+    <p class="hero-desc">Dynamic PLM Consultant with over 6.5 years of expertise in PLM implementation, process design, and system validation within the automotive manufacturing sector. Transforming complex business requirements into tailored PLM solutions.</p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">View Experience →</a>
+      <a href="mailto:gaganpreets.bungai@gmail.com" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right fade-in" style="transition-delay:0.2s;">
+    <div class="hero-card">
+      <div class="card-avatar">GB</div>
+      <div class="card-name">Gaganpreet Singh T Bungai</div>
+      <div class="card-role">Senior Solution Developer @ Tata Technologies</div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-num">6.5+</div>
+          <div class="stat-label">Years Exp.</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">350+</div>
+          <div class="stat-label">Users Supported</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Major Projects</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">3</div>
+          <div class="stat-label">DS Certifications</div>
+        </div>
+      </div>
+      <div class="contact-pills">
+        <div class="pill"><div class="pill-icon">📍</div>Pune, Maharashtra</div>
+        <div class="pill"><div class="pill-icon">📞</div>9623634098</div>
+        <div class="pill"><div class="pill-icon">✉️</div>gaganpreets.bungai@gmail.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-in">
+    <div class="section-label">Career Journey</div>
+    <h2 class="section-title">Work Experience</h2>
+  </div>
+
+  <div class="exp-grid">
+
+    <!-- Tata Technologies -->
+    <div class="exp-card fade-in">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">Tata Technologies Ltd <span class="current-badge">CURRENT</span></div>
+          <div class="exp-role">Senior Solution Developer</div>
+        </div>
+        <div class="exp-period">Nov 2023 – Present</div>
+      </div>
+      <div class="exp-projects">
+
+        <div class="project-item">
+          <div class="project-name">🏭 Implementation of 3DX DELMIA V6</div>
+          <ul class="resp-list">
+            <li>Analysed business requirements, documented workflows, and proposed process improvements aligned with DELMIA V6.</li>
+            <li>Collaborated with stakeholders to define and prioritize use cases, ensuring system functionality met operational needs.</li>
+            <li>Designed, configured, and integrated DELMIA solutions; resolved technical issues during implementation.</li>
+            <li>Installed FCS servers across plants, managed PnO and license assignments, and deployed 3D Experience 2022X platform.</li>
+            <li>Created MBOMs, Process Plans, and Resource BOMs for passenger vehicles and CV frame assemblies using MID and MFN apps.</li>
+            <li>Proposed BOP solutions and resource planning strategies for CV segment platforms using Manufacturing Process Engineer (MGA).</li>
+          </ul>
+        </div>
+
+        <div class="project-item">
+          <div class="project-name">🔧 CREO Power-By Solution POC for TML</div>
+          <ul class="resp-list">
+            <li>Prepared and established CREO Power By proof of concept (POC).</li>
+            <li>Installed and configured CREO parametric 2022X connector for smooth functioning.</li>
+            <li>Configured Global Configuration Object (GCO) as per requirements.</li>
+            <li>Evaluated different data migration approaches (CREO Power By, FOP, FBDI) and selected CREO Power By as the optimal solution.</li>
+            <li>Coordinated with Dassault Systems to resolve issues during POC.</li>
+          </ul>
+        </div>
+
+        <div class="project-item">
+          <div class="project-name">🔗 DELMIA Digital Manufacturing to DELMIA Apriso Integration</div>
+          <ul class="resp-list">
+            <li>Developed end-to-end use cases in DELMIA including Manufacturing BOM, Bill of Process (BoP) creation, and Work Instruction sheet authoring with seamless publication in Apriso.</li>
+            <li>Coordinated with Dassault System's R&D team to troubleshoot and resolve issues during POC.</li>
+            <li>Provided comprehensive end-to-end support for DELMIA Manufacturing, covering all aspects from setup to execution.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- VE Commercial Vehicles -->
+    <div class="exp-card fade-in">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">VE Commercial Vehicles Ltd, Indore</div>
+          <div class="exp-role">Deputy Manager</div>
+        </div>
+        <div class="exp-period">Sep 2019 – Oct 2023</div>
+      </div>
+      <div class="exp-projects">
+
+        <div class="project-item">
+          <div class="project-name">🚀 Implementation of Integrated Product Data Management — Dassault 3DExperience</div>
+          <ul class="resp-list">
+            <li>Covered Variant Management, Digital Mock-up, MultiCAD Integration, Unified Change Management, and Digital Manufacturing.</li>
+            <li>Participated in Catia V5 data migration to 3DExperience R2018x and Wind-chill PDMLink 11.0 to 3DExperience R2018X.</li>
+            <li>Designed, drove, and implemented new processes/solutions to meet business requirements.</li>
+            <li>Conducted pre-implementation testing, validation, SIT, and UAT.</li>
+            <li>Provided end-user support via ticket management for 350+ users as single point of contact for PLM and Multi-CAD environment.</li>
+            <li>Performed in-house customization, trigger/JPO/JSP modifications, and data model enhancements.</li>
+            <li>Administered CAD tools (CREO, 3DX CATIA) and managed 3D Experience licenses (DSLS).</li>
+          </ul>
+        </div>
+
+        <div class="project-item">
+          <div class="project-name">⬆️ Upgrade of 3D Experience 2018X to 2023X</div>
+          <ul class="resp-list">
+            <li>Identified and documented limitations in 3DX (Multi-CAD Data Management, Variant Management, CAD-DMU, and Change Management), initiating the upgrade project.</li>
+            <li>Collaborated with cross-functional teams to define project scope, objectives, and timelines.</li>
+            <li>Developed and implemented comprehensive upgrade strategy including resource allocation, testing, and contingency planning.</li>
+            <li>Performed thorough testing and validation of new functionalities across versions 21X, 22X, and 23X.</li>
+            <li>Coordinated with Dassault technical support to address discrepancies during the upgrade process.</li>
+            <li>Delivered training and support to ensure smooth transition and adoption of the upgraded system.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <div class="section-label">Technical Arsenal</div>
+    <h2 class="section-title">Skills & Expertise</h2>
+  </div>
+  <div class="skills-layout">
+    <div class="skill-category fade-in">
+      <div class="skill-cat-title"><div class="skill-cat-icon">⚙️</div>PLM Platforms</div>
+      <div class="tags">
+        <span class="tag">3DExperience (R2018X – 2023X)</span>
+        <span class="tag">DELMIA V6</span>
+        <span class="tag">Wind-chill PDMLink 11.0</span>
+        <span class="tag">DELMIA Apriso</span>
+        <span class="tag">3DSwymer</span>
+      </div>
+    </div>
+    <div class="skill-category fade-in" style="transition-delay:0.1s;">
+      <div class="skill-cat-title"><div class="skill-cat-icon">🖥️</div>CAD Tools</div>
+      <div class="tags">
+        <span class="tag">CATIA V5</span>
+        <span class="tag">3DX CATIA</span>
+        <span class="tag">CREO Parametric</span>
+        <span class="tag">CREO Power-By</span>
+        <span class="tag">Digital Mock-Up (DMU)</span>
+      </div>
+    </div>
+    <div class="skill-category fade-in" style="transition-delay:0.15s;">
+      <div class="skill-cat-title"><div class="skill-cat-icon">🔧</div>Technical Skills</div>
+      <div class="tags">
+        <span class="tag">MQL</span>
+        <span class="tag">Matrix & Business</span>
+        <span class="tag">Data Model Customization</span>
+        <span class="tag">EKL (Enterprise Query Language)</span>
+        <span class="tag">JPO / JSP Modifications</span>
+        <span class="tag">Trigger Configuration</span>
+        <span class="tag">FCS Server Management</span>
+        <span class="tag">PnO & License Management</span>
+      </div>
+    </div>
+    <div class="skill-category fade-in" style="transition-delay:0.2s;">
+      <div class="skill-cat-title"><div class="skill-cat-icon">📋</div>Process & Domain</div>
+      <div class="tags">
+        <span class="tag">Variant Management</span>
+        <span class="tag">Change Management</span>
+        <span class="tag">MBOM / PBOM Creation</span>
+        <span class="tag">Bill of Process (BoP)</span>
+        <span class="tag">Digital Manufacturing</span>
+        <span class="tag">SIT & UAT</span>
+        <span class="tag">Multi-CAD Integration</span>
+        <span class="tag">Data Migration</span>
+      </div>
+    </div>
+    <div class="skill-category fade-in" style="transition-delay:0.25s;">
+      <div class="skill-cat-title"><div class="skill-cat-icon">🤝</div>Soft Skills</div>
+      <div class="tags">
+        <span class="tag">Stakeholder Management</span>
+        <span class="tag">Cross-functional Collaboration</span>
+        <span class="tag">End-user Training</span>
+        <span class="tag">Technical Documentation</span>
+        <span class="tag">Project Coordination</span>
+        <span class="tag">Ticket Management</span>
+      </div>
+    </div>
+    <div class="skill-category fade-in" style="transition-delay:0.3s;">
+      <div class="skill-cat-title"><div class="skill-cat-icon">🏗️</div>Administration</div>
+      <div class="tags">
+        <span class="tag">3DX Client Installation</span>
+        <span class="tag">DSLS License Management</span>
+        <span class="tag">IDM Multi-CAD Data Mgmt.</span>
+        <span class="tag">Connector Configuration</span>
+        <span class="tag">GCO Configuration</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header fade-in">
+    <div class="section-label">Academic Background</div>
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div class="edu-timeline">
+
+    <div class="edu-item fade-in">
+      <div class="edu-card">
+        <div class="edu-degree">M.Tech — Mechanical Engineering (PLM Specialization)</div>
+        <div class="edu-school">SGGS Institute of Technology (Govt. Autonomous), Nanded</div>
+        <div class="edu-meta">
+          <span class="edu-year">Aug 2019</span>
+          <span class="edu-grade">First Class · 8.0 CGPA</span>
+        </div>
+        <div class="edu-thesis">📄 Thesis: "Implementation of CAD-DMU process in CV industry using 3DEXPERIENCE Platform"</div>
+      </div>
+    </div>
+
+    <div class="edu-item fade-in">
+      <div class="edu-card">
+        <div class="edu-degree">B.E — Mechanical Engineering</div>
+        <div class="edu-school">MPGI's School of Engineering & Technology, Nanded · Affiliated to SRTM University</div>
+        <div class="edu-meta">
+          <span class="edu-year">Jul 2016</span>
+          <span class="edu-grade">First Class · 78%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-item fade-in">
+      <div class="edu-card">
+        <div class="edu-degree">Diploma — Mechanical Engineering</div>
+        <div class="edu-school">Gramin Polytechnic Vishnupuri, Nanded · Affiliated to MSBTE Mumbai</div>
+        <div class="edu-meta">
+          <span class="edu-year">Aug 2013</span>
+          <span class="edu-grade">First Class · 73%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-item fade-in">
+      <div class="edu-card">
+        <div class="edu-degree">SSC — Secondary School Certificate</div>
+        <div class="edu-school">MDM High School, Nanded · State Board Latur Division</div>
+        <div class="edu-meta">
+          <span class="edu-year">Mar 2008</span>
+          <span class="edu-grade">First Class with Distinction · 84.21%</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header fade-in">
+    <div class="section-label">Professional Credentials</div>
+    <h2 class="section-title">Certifications</h2>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card fade-in">
+      <div class="cert-icon">🏆</div>
+      <div>
+        <div class="cert-name">DS Certified 3DExperience Process Engineer — Associate</div>
+        <div class="cert-issuer">Dassault Systèmes</div>
+      </div>
+    </div>
+    <div class="cert-card fade-in" style="transition-delay:0.1s;">
+      <div class="cert-icon">🎓</div>
+      <div>
+        <div class="cert-name">3DSwymer — Associate</div>
+        <div class="cert-issuer">Dassault Systèmes</div>
+      </div>
+    </div>
+    <div class="cert-card fade-in" style="transition-delay:0.2s;">
+      <div class="cert-icon">🌐</div>
+      <div>
+        <div class="cert-name">Collaborative Industry Innovator — Associate</div>
+        <div class="cert-issuer">Dassault Systèmes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">G<span>.</span>Bungai</div>
+  <div class="footer-sub">PLM Consultant · Automotive Manufacturing Expert · Pune, India</div>
+  <div class="footer-contact">
+    <a href="mailto:gaganpreets.bungai@gmail.com" class="footer-link">✉️ gaganpreets.bungai@gmail.com</a>
+    <a href="tel:9623634098" class="footer-link">📞 9623634098</a>
+    <span class="footer-link">📍 Pune, Maharashtra</span>
+  </div>
+  <div class="footer-copy">© 2026 Gaganpreet Singh T Bungai · Built with care</div>
+</footer>
+
+<script>
+  // Theme toggle
+  function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    document.getElementById('themeIcon').textContent = next === 'light' ? '🌙' : '☀️';
+    document.getElementById('themeLabel').textContent = next === 'light' ? 'Dark' : 'Light';
+  }
+
+  // Mobile nav
+  let mobileOpen = false;
+  function toggleNav() {
+    mobileOpen = !mobileOpen;
+    const nav = document.getElementById('mobileNav');
+    nav.style.display = mobileOpen ? 'flex' : 'none';
+  }
+  function closeMobileNav() {
+    mobileOpen = false;
+    document.getElementById('mobileNav').style.display = 'none';
+  }
+
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
